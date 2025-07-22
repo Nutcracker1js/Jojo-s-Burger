@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jojo's Burger</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Cute Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --main-bg: #f7f6f2;
+        --accent: #b68405;
+        --accent-dark: #fb6000;
+        --brand: #bf1212;
+        --brand-dark: #470218;
+        --white: #fff;
+      }
+      body {
+        background: var(--main-bg);
+      }
+      .navbar {
+        background: linear-gradient(90deg, var(--brand), var(--accent));
+        box-shadow: 0 4px 24px rgba(33,158,188,0.08);
+      }
+      .navbar-brand {
+        font-family: 'Pacifico', cursive;
+        font-size: 2.2rem !important;
+        color: var(--white) !important;
+        letter-spacing: 2px;
+        text-shadow: 0 2px 8px #219ebc44;
+      }
+      .navbar-toggler {
+        border: none;
+      }
+      .navbar-nav .nav-link {
+        color: var(--white) !important;
+        font-weight: 500;
+        font-size: 1.1rem;
+        margin-right: 0.5rem;
+        transition: color 0.2s;
+      }
+      .navbar-nav .nav-link.active,
+      .navbar-nav .nav-link:focus,
+      .navbar-nav .nav-link:hover {
+        color: var(--accent-dark) !important;
+      }
+      /* Offcanvas container */
+.offcanvas {
+  background-color: var(--main-bg) !important;
+  color: var(--brand-dark);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Offcanvas title */
+.offcanvas-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--brand-dark);
+  font-family: 'Pacifico', cursive;
+}
+
+/* Close button */
+.offcanvas-header .btn-close {
+  background-color: var(--brand);
+  opacity: 0.8;
+  border-radius: 50%;
+}
+.offcanvas-header .btn-close:hover {
+  background-color: var(--accent-dark);
+  opacity: 1;
+}
+
+/* Navigation links */
+.offcanvas .nav-link {
+  color: var(--brand-dark);
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.offcanvas .nav-link:hover,
+.offcanvas .nav-link:focus {
+  background-color: var(--accent);/
+  color: var(--black);
+}
+
+/* Divider */
+.dropdown-divider {
+  border-color: rgba(191, 18, 18, 0.2); /* subtle brand tint */
+  margin: 1rem 0;
+}
+
+      }
+      .carousel {
+        border-radius: 1.5rem;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(33,158,188,0.10);
+        margin-bottom: 2.5rem;
+      }
+      .carousel-inner img {
+        max-height: 60vh;
+        object-fit: cover;
+        background: var(--white);
+      }
+      .carousel-caption {
+        background: none !important;
+        color: inherit;
+        border-radius: 0;
+        padding: 0;
+        left: 0;
+        right: 0;
+        bottom: 10%;
+        text-align: center;
+      }
+      h2, .text-success {
+        color: var(--brand-dark) !important;
+        font-family: 'Pacifico', cursive;
+      }
+      .card {
+        border: none;
+        border-radius: 1.2rem;
+        box-shadow: 0 4px 24px rgba(33,158,188,0.08);
+      }
+      .card-img-top {
+        border-radius: 1.2rem 1.2rem 0 0;
+        object-fit: cover;
+        max-height: 220px;
+        background: var(--main-bg);
+      }
+      .badge.bg-success {
+        background: var(--accent-dark) !important;
+        color: var(--white);
+        font-size: 1rem;
+      }
+      .btn-success, .btn-success:focus {
+        background: var(--accent-dark) !important;
+        border: none;
+        font-weight: bold;
+        border-radius: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        font-size: 1.1rem;
+        box-shadow: 0 2px 8px #fb850033;
+      }
+      .btn-success:hover {
+        background: var(--accent) !important;
+        color: var(--brand-dark) !important;
+      }
+      .form-control:focus {
+        border-color: var(--brand);
+        box-shadow: 0 2px 8px #219ebc33;
+      }
+      @media (max-width: 700px) {
+        .carousel-inner img {
+          max-height: 32vh;
+        }
+        .navbar-brand {
+          font-size: 1.3rem !important;
+        }
+      }
+      h2 {
+  text-align: center;
+  text-transform: capitalize;
+  font-family: 'Pacifico', cursive;
+  color: var(--brand-dark);
+}
+@media (max-width: 991px) {
+  form[role="search"] {
+    display: none !important;
+  }
+}
+form[role="search"] input {
+  padding-left: 1rem;
+  background: #fff;
+  color: var(--brand-dark);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+form[role="search"] button {
+  background: var(--accent-dark);
+  color: white;
+  border: none;
+  padding: 0 1.5rem;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+form[role="search"] button:hover {
+  background: var(--accent);
+  color: var(--brand-dark);
+}
+.navbar-brand span {
+  text-shadow:
+    -1px -1px 0 var(--accent),
+     1px -1px 0 var(--accent),
+    -1px  1px 0 var(--accent),
+     1px  1px 0 var(--accent);
+  color: var(--white);
+}
+
+
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+          <img src="images/burger logo.jpg_small" alt="Jojo's Burger Logo" style="height: 48px; border-radius: 50%; box-shadow: 0 2px 8px #fb850033;">
+          <span class="fw-bold" style="font-family: 'Pacifico', cursive; font-size: 2rem; color: var(--white); letter-spacing: 2px;">Jojo's Burger</span>
+        </a>
+<!-- Search Form (centered absolutely) -->
+    <form class="d-none d-lg-flex position-absolute start-50 translate-middle-x" role="search" style="width: 350px;">
+      <input class="form-control rounded-start-pill border-0" type="search" placeholder="Search burgers..." aria-label="Search">
+      <button class="btn btn-success rounded-end-pill" type="submit">Search</button>
+    </form>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html#home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="menu.html">Menu</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="review.html">Review</a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cart.html">Cart</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact Us</a>
+                
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+   <!-- Products Section -->
+<section id="products" class="container mb-5">
+  <h2 class="mb-4 text-success text-center">Our Burgers</h2>
+  <div class="row g-4">
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/burger 1.avif" class="card-img-top" alt="Normal Burger">
+        <div class="card-body">
+          <h5 class="card-title">Normal Burger</h5>
+          <span class="badge bg-success mb-2">₦9,500.00</span>
+        <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html"
+   class="btn btn-success w-100 add-to-cart"
+   data-name="normal Burger"
+   data-price="9500"
+   data-image="images/burger 1.avif">Add to Cart</a>
+ </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/burger 2.avif" class="card-img-top" alt="Beef Burger">
+        <div class="card-body">
+          <h5 class="card-title">Beef Burger</h5>
+          <span class="badge bg-success mb-2">₦11,000.00</span>
+         <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html"
+   class="btn btn-success w-100 add-to-cart"
+   data-name="Beef Burger"
+   data-price="11000"
+   data-image="images/burger 2.avif">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/burger 3.avif" class="card-img-top" alt="Special Chicken Burger">
+        <div class="card-body">
+          <h5 class="card-title">Special Chicken Burger</h5>
+          <span class="badge bg-success mb-2">₦15,000.00</span>
+          <div class="input-group mb-2">
+            <button class="btn btn-outline-secondary" type="button">-</button>
+            <input type="number" class="form-control text-center" value="1" min="1">
+            <button class="btn btn-outline-secondary" type="button">+</button>
+          </div>
+        <a href="cart.html"
+   class="btn btn-success w-100 add-to-cart"
+   data-name="special chicken Burger"
+   data-price="15000"
+   data-image="images/burger 3.avif">Add to Cart</a>
+       </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/bb.jfif" class="card-img-top" alt="Spicy Chicken Burger">
+        <div class="card-body">
+          <h5 class="card-title">Spicy Chicken Burger</h5>
+          <span class="badge bg-success mb-2">₦14,000.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+         <a href="cart.html"
+   class="btn btn-success w-100 add-to-cart"
+   data-name="spicy chicken Burger"
+   data-price="11000"
+   data-image="images/bb.jfif">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/cheese burger.jfif" class="card-img-top" alt="Cheese Burger">
+        <div class="card-body">
+          <h5 class="card-title">Cheese Burger</h5>
+          <span class="badge bg-success mb-2">₦13,500.00</span>
+          <div class="input-group mb-2">
+            <button class="btn btn-outline-secondary" type="button">-</button>
+            <input type="number" class="form-control text-center" value="1" min="1">
+            <button class="btn btn-outline-secondary" type="button">+</button>
+          </div>
+          <a href="cart.html"
+   class="btn btn-success w-100 add-to-cart"
+   data-name="cheese Burger"
+   data-price="13500"
+   data-image="images/cheese burger.jfif">Add to Cart</a>
+          </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/suya burger.jfif" class="card-img-top" alt="Suya Burger">
+        <div class="card-body">
+          <h5 class="card-title">Suya Burger</h5>
+          <span class="badge bg-success mb-2">₦12,000.00</span>
+         <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+         <a href="cart.html"
+   class="btn btn-success w-100 add-to-cart"
+   data-name="suya Burger"
+   data-price="12000"
+   data-image="images/suya burger.jfif">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="products" class="container mb-5">
+  <h2 class="mb-4 text-success text-center">Sides</h2>
+  <div class="row g-4">
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/french fries.jfif" class="card-img-top" alt="French Fries">
+        <div class="card-body">
+          <h5 class="card-title">French Fries</h5>
+          <span class="badge bg-success mb-2">₦5,500.00</span>
+         <div class="input-group mb-2 quantity-control">11
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/cheese fries.jfif" class="card-img-top" alt="loaded fries">
+        <div class="card-body">
+          <h5 class="card-title">Loaded Fries</h5>
+          <span class="badge bg-success mb-2">₦9,500.00</span>
+          <div class="input-group mb-2">
+            <button class="btn btn-outline-secondary" type="button">-</button>
+            <input type="number" class="form-control text-center" value="1" min="1">
+            <button class="btn btn-outline-secondary" type="button">+</button>
+          </div>
+          <button class="btn btn-success w-100">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+   <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/sausage.jfif" class="card-img-top" alt="sausage">
+        <div class="card-body">
+          <h5 class="card-title">Sausage</h5>
+          <span class="badge bg-success mb-2">₦1,000.00</span>
+         <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="products" class="container mb-5">
+  <h2 class="mb-4 text-success text-center">Drinks</h2>
+  <div class="row g-4">
+
+   <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/straw.jfif" class="card-img-top" alt="Strawberry Milkshake">
+        <div class="card-body">
+          <h5 class="card-title">Strawberry Milkshake</h5>
+          <span class="badge bg-success mb-2">₦7,500.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+      <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/b milk.jfif" class="card-img-top" alt="Banana Milkshake">
+        <div class="card-body">
+          <h5 class="card-title">Banana Milkshake</h5>
+          <span class="badge bg-success mb-2">₦7,500.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/oreo milkshake.jfif" class="card-img-top" alt="Oreo Milkshake">
+        <div class="card-body">
+          <h5 class="card-title">Oreo Milkshake</h5>
+          <span class="badge bg-success mb-2">₦8,000.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+<div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/van.jfif" class="card-img-top" alt="Vanilla Milkshake">
+        <div class="card-body">
+          <h5 class="card-title">Vanilla Milkshake</h5>
+          <span class="badge bg-success mb-2">₦7,500.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/chapman.jfif" class="card-img-top" alt="Chapman">
+        <div class="card-body">
+          <h5 class="card-title">Chapman</h5>
+          <span class="badge bg-success mb-2">₦6,500.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+ <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/parfait 2.jfif" class="card-img-top" alt="Parfait">
+        <div class="card-body">
+          <h5 class="card-title">Parfait</h5>
+          <span class="badge bg-success mb-2">₦7,000.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+   <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/parfait.jfif" class="card-img-top" alt="fruit parfait">
+        <div class="card-body">
+          <h5 class="card-title">Fruit Parfait</h5>
+          <span class="badge bg-success mb-2">₦5,500.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+   <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/greek.jfif" class="card-img-top" alt="greek yoghurt">
+        <div class="card-body">
+          <h5 class="card-title">Greek Yoghurt</h5>
+          <span class="badge bg-success mb-2">₦6,500.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/yoghurt.jfif" class="card-img-top" alt="plain yoghurt">
+        <div class="card-body">
+          <h5 class="card-title">Plain Yoghurt</h5>
+          <span class="badge bg-success mb-2">₦6,000.00</span>
+         <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+<section id="products" class="container mb-5">
+  <h2 class="mb-4 text-success text-center">Grillz</h2>
+  <div class="row g-4">
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/beef shaw.jfif" class="card-img-top" alt="Shawarma">
+        <div class="card-body">
+          <h5 class="card-title">Shawarma</h5>
+          <span class="badge bg-success mb-2">₦3,000.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <button 
+  class="btn btn-success w-100 add-to-cart" 
+  data-name="Shawarma" 
+  data-price="3000" 
+  data-image="images/beef shaw.jfif">
+  Add to Cart
+</button>
+  </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/chi shaw.jfif" class="card-img-top" alt="Chicken Shawarma">
+        <div class="card-body">
+          <h5 class="card-title">Chicken Shawarma</h5>
+          <span class="badge bg-success mb-2">₦4,000.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/class shaw.jfif" class="card-img-top" alt="Shawarma Classic">
+        <div class="card-body">
+          <h5 class="card-title">Shawarma Classic</h5>
+          <span class="badge bg-success mb-2">₦5,500.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/special.jfif" class="card-img-top" alt="Shawarma Special">
+        <div class="card-body">
+          <h5 class="card-title">Shawarma Special</h5>
+          <span class="badge bg-success mb-2">₦7,500.00</span>
+         <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+     <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/suya shawa.jfif" class="card-img-top" alt="Suya Shawarma">
+        <div class="card-body">
+          <h5 class="card-title">Suya Shawarma</h5>
+          <span class="badge bg-success mb-2">₦7,500.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/turkey wings.jfif" class="card-img-top" alt="Grilled Turkey Wings">
+        <div class="card-body">
+          <h5 class="card-title">Grilled Turkey Wings</h5>
+          <span class="badge bg-success mb-2">₦8,000.00</span>
+          <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/chick wings.jfif" class="card-img-top" alt="Grilled Chicken Wings">
+        <div class="card-body">
+          <h5 class="card-title">Grilled Chicken Wings</h5>
+          <span class="badge bg-success mb-2">₦5,500.00</span>
+         <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+
+   <div class="col-md-4">
+  <div class="card h-100 shadow-sm">
+    <img src="images/chi lap.jfif" class="card-img-top" alt="Grilled Chicken Lap">
+    <div class="card-body">
+      <h5 class="card-title">Grilled Chicken Lap</h5>
+      <span class="badge bg-success mb-2">₦6,500.00</span>
+      <div class="input-group mb-2 quantity-control">
+        <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+        <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+        <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+      </div>
+      <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+    </div>
+  </div>
+</div>
+
+
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm">
+        <img src="images/t lap.jfif" class="card-img-top" alt="Grilled Turkey Lap">
+        <div class="card-body">
+          <h5 class="card-title">Grilled Turkey Lap</h5>
+          <span class="badge bg-success mb-2">₦9,500.00</span>
+         <div class="input-group mb-2 quantity-control">
+            <button class="btn btn-outline-secondary btn-minus" type="button">-</button>
+            <input type="number" class="form-control text-center quantity-input" value="1" min="1">
+            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+          </div>
+          <a href="cart.html" class="btn btn-success w-100">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer-->
+<footer class="footer mt-5 py-4 bg-dark text-light">
+  <div class="container text-center">
+    <p class="mb-1">&copy; 2025 Jojo's Burger. All rights reserved.</p>
+    <div class="social-icons mt-2">
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733547.png" alt="Facebook"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733558.png" alt="Instagram"></a>
+      <a href="#"><img src="https://cdn-icons-png.flaticon.com/24/733/733579.png" alt="Twitter"></a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"></script>
+<script>
+  const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const name = button.dataset.name;
+      const price = parseFloat(button.dataset.price);
+      const image = button.dataset.image;
+      const card = button.closest('.card');
+      const quantityInput = card.querySelector('.quantity-input');
+      const quantity = parseInt(quantityInput.value);
+
+      const product = {
+        name,
+        price,
+        image,
+        quantity
+      };
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      const existingProduct = cart.find(item => item.name === product.name);
+      if (existingProduct) {
+        existingProduct.quantity += quantity;
+      } else {
+        cart.push(product);
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      window.location.href = 'cart.html';
+    });
+  });
+</script>
+
+  </body>
+</html>
